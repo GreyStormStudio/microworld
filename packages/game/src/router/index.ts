@@ -1,14 +1,20 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 //初始界面(啥都没有)
-import Empty from '../App.vue'
+import Index from '../App.vue'
+import Home from '../components/home.vue'
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: '',
-        component: Empty
+        component: Index
     },
+    {
+        path: '/',
+        name: 'home',
+        component: Home
+    }
 
 ]
 
