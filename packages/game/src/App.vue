@@ -2,10 +2,10 @@
     <router-view></router-view>
 </template>
 <style></style>
-<script>
+<script lang="ts">
 export default {
     created() {
-        this.$router.push('/home');
+        this.$router.push('/login');
     }
 }
 </script>
