@@ -4,6 +4,11 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
+  "baseUrl": "./",
+  "paths": {
+      "@game/*": ["./src/*"],
+      "@shared/*": ["../shared/*"]
+  },
   "compilerOptions": {
     "types": ["node", "config/env"],
   },

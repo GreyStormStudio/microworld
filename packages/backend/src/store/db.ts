@@ -1,4 +1,5 @@
 import { Level } from "level";
+import "@shared/index"
 
 const db = new Level('../dist/db');
 
@@ -20,11 +21,11 @@ function deserialize<T>(data: string): T {
 async function putdata(data: any, key: string) {//储存数据
     try {
         await db.put(key, serialize(data));
-        return true;
+        return OK;
     }
     catch (err) {
         console.log(err);
-        return false;
+        return ERROR_UNDEFINED;
     }
 }
 /**
@@ -40,12 +41,12 @@ async function getdata(key: string) {//获取数据
             return data;
         }
         else {
-            return null;
+            return KEY_NOT_FOUND;
         }
     }
     catch (err) {
         console.log(err);
-        return null;
+        return ERROR_UNDEFINED;
     }
 }
 
@@ -57,15 +58,36 @@ async function getdata(key: string) {//获取数据
 async function deletdata(key: string) {//删除数据
     try {
         await db.del(key);
-        return true;
+        return OK;
     }
     catch (err) {
         console.log(err);
-        return false;
+        return ERROR_UNDEFINED;
     }
 }
-
-async function updatedata(key: string, data: any) {//更新数据
+/**
+ * 
+ * @param key 键
+ * @param data {子键:值}
+ * @returns 是否成功
+ */
+async function updatedata(key: string, data: { key: string, value: any }) {//更新数据
+    try {
+        const odata = await db.get(key);
+        if (odata) {
+            const odataObj = deserialize<any>(odata);
+            odataObj[data.key] = data.value;
+            await db.put(key, serialize(odataObj));
+            return OK;
+        }
+        else {
+            return KEY_NOT_FOUND;
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return ERROR_UNDEFINED;
+    }
 }
 
 /**
