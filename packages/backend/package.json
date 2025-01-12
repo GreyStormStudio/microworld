@@ -26,5 +26,8 @@
         "ts-node": "^10.9.2",
         "typescript": "^5.7.2",
         "uuid": "^11.0.4"
+    },
+    "devDependencies": {
+        "@types/nodemailer": "^6.4.17"
     }
 }

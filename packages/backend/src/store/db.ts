@@ -104,3 +104,5 @@ async function getkeys() {//获取所有键
         return [];
     }
 }
+
+export { putdata, getdata, deletdata, updatedata, getkeys };
