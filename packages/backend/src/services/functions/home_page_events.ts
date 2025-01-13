@@ -31,3 +31,5 @@ async function register(email: string, password: string) {
     };
     return true;
 }
+
+export { login, changePassword, register };
