@@ -1,4 +1,6 @@
 import { getdata, putdata, updatedata } from "@backend/store/db";
+import { Md5 } from "ts-md5"
+import nodemailer from 'nodemailer';
 import "@shared/index"
 
 async function login(email: string, password: string) {
@@ -26,10 +28,30 @@ async function register(email: string, password: string) {
     if (userData) {
         return false;
     }
-    if (await putdata({ email, password }, key) !== OK) {
+    if (await putdata(key, Md5.hashStr(password)) !== OK) {
         return false;
     };
     return true;
 }
 
-export { login, changePassword, register };
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+});
+
+async function sendCode(email: string, code: string) {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: '验证码',
+        text: `您的验证码为：${code},5分钟内有效。`,
+    };
+    return await transporter.sendMail(mailOptions);
+};
+export { login, changePassword, register, sendCode };

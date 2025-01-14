@@ -1,0 +1,2 @@
+EMAIL_KEY+email:{PWD_KEY:password(hashed),USERNAME_KEY:username}
+
