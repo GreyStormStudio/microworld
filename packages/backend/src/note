@@ -1,2 +1,3 @@
-EMAIL_KEY+email:{PWD_KEY:password(hashed),USERNAME_KEY:username}
+EMAIL_KEY+email:{PWD_KEY:password(hashed),USERNAME_KEY:username,UUID_KEY:uuid}
+密码直接储存为md5哈希值,用户名可重复,UUID唯一
 
