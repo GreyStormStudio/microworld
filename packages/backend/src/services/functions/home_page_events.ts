@@ -6,7 +6,7 @@ import "@shared/index"
 async function login(email: string, password: string) {
     const key = EMAIL_KEY + email;
     const userData = await getdata(key);
-    if (userData && userData.password === password) {
+    if (userData && userData.password === Md5.hashStr(password)) {
         return true;
     }
     return false;
