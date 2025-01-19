@@ -3,8 +3,8 @@
         <h1>Login</h1>
         <form class="login">
             <div>
-                <label for="username">邮箱:</label>
-                <input type="text" id="username" v-model="username" required>
+                <label for="email">邮箱:</label>
+                <input type="text" id="email" v-model="email" required>
             </div>
             <div><label for="password">密码:</label>
                 <input type="password" id="password" v-model="password" required>
@@ -25,18 +25,18 @@
 export default {
     data() {
         return {
-            username: '',
+            email: '',
             password: ''
         };
     },
     methods: {
         login() {
-            this.$socket.emit('login', { username: this.username, password: this.password });
+            this.$socket.emit('login', { username: this.email, password: this.password });
             this.$socket.once('login_response', (response) => {
                 if (response.success) {
                     this.$router.push('/game');
                 } else {
-                    alert('Invalid username or password');
+                    alert('邮箱或密码错误');
                 }
             });
         }
