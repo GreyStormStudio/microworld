@@ -7,7 +7,9 @@ interface ExtendedSprite extends Sprite {
 }
 
 class UI extends Container {
-    constructor() {
+    public sprite: ExtendedSprite;
+    constructor(spriteTexture: Texture) {
         super();
+        this.sprite = new Sprite(spriteTexture);
     }
 }
